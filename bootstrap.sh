@@ -4,14 +4,38 @@
 pkg up -y
 
 # Install packages
-pkg install -y neovim tmux nodejs python zsh git exa file mosh neofetch
+pkg install -y neovim tmux nodejs python zsh git exa file mosh ripgrep
 
 #########
 # Shell #
 #########
 
+
 # Set up oh-my-zsh
 curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh
+
+rm ~/.zshrc
+# Create simple base .zshrc
+cat <<EOF >> ~/.zshrc
+export ZSH="/data/data/com.termux/files/home/.oh-my-zsh"
+
+ZSH_THEME="powerlevel10k/powerlevel10k"
+
+plugins=(git)
+
+source /data/data/com.termux/files/home/.oh-my-zsh/oh-my-zsh.sh
+
+# Aliases
+alias vim=nvim
+alias ls=exa
+alias rg="rg -S"
+alias rgff="rg --files -g"
+alias p=poetry
+alias ,,='git rev-parse --git-dir >/dev/null 2>&1 && cd `git rev-parse --show-toplevel` || echo "Not in git repo"'
+EOF
+
+# Set up powerlevel10k
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/custom/themes/powerlevel10k
 
 ##########
 # Python #
@@ -29,16 +53,14 @@ npm install -g yarn
 # Misc #
 ########
 
-# Add aliases
-echo "alias vim=nvim" >> .zshrc
-echo "alias ls=exa" >> .zshrc
-echo "neofetch" >> .zshrc
-
 # Clear default motd
 rm /data/data/com.termux/files/usr/etc/motd
 
 # Set default shell
 chsh -s zsh
+
+# Set default tmux terminal to 256 colour
+echo "set -g default-terminal \"screen-256color\"" > ~/.tmux.conf
 
 #######
 # Vim #
