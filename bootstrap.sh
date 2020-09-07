@@ -10,7 +10,6 @@ pkg install -y neovim tmux nodejs python zsh git exa file mosh ripgrep
 # Shell #
 #########
 
-
 # Set up oh-my-zsh
 curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh
 
@@ -61,6 +60,16 @@ chsh -s zsh
 
 # Set default tmux terminal to 256 colour
 echo "set -g default-terminal \"screen-256color\"" > ~/.tmux.conf
+
+#################
+# Termux config #
+#################
+cat <<EOF >> ~/.termux/termux.properties
+extra-keys = [ \
+ ['ESC','|','/','-','UP', 'BKSP'], \
+ ['TAB','CTRL','ALT','LEFT','DOWN','RIGHT'] \
+]
+EOF
 
 #######
 # Vim #
