@@ -4,7 +4,7 @@
 pkg up -y
 
 # Install packages
-pkg install -y neovim tmux nodejs python zsh git exa file mosh ripgrep
+pkg install -y neovim tmux nodejs python zsh git exa file mosh ripgrep hub
 
 #########
 # Shell #
@@ -35,12 +35,19 @@ alias rg="rg -S"
 alias rgff="rg --files -g"
 alias p=poetry
 alias ,,='git rev-parse --git-dir >/dev/null 2>&1 && cd \`git rev-parse --show-toplevel\` || echo "Not in git repo"'
+alias git=hub
 
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 EOF
 
 # Set up powerlevel10k
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/custom/themes/powerlevel10k
+
+# Fetch the powerlevel10k config
+curl -fLo ~/.p10k.zsh https://gist.githubusercontent.com/ikornaselur/9c2859c08bc72f0918d20ca6afccce47/raw
+
+# Set default shell
+chsh -s zsh
 
 ##########
 # Python #
@@ -55,23 +62,38 @@ python -m pip install poetry black mypy ipython isort pynvim flake8
 npm install -g yarn
 
 ########
-# Misc #
+# Tmux #
 ########
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
+cat <<EOF >> ~/.tmux.conf
+# remap prefix from 'C-b' to 'C-a'
+unbind C-b
+set-option -g prefix C-a
+bind-key C-a send-prefix
+
+# Set default tmux terminal to 256 color
+set -g default-terminal "screen-256color"
+
+# List of plugins
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-sensible'
+set -g @plugin "arcticicestudio/nord-tmux"
+
+if "test ! -d ~/.tmux/plugins/tpm" \
+   "run 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && ~/.tmux/plugins/tpm/bin/install_plugins'"
+
+# Initialize TMUX plugin manager
+run '~/.tmux/plugins/tpm/tpm'
+EOF
+
+##########
+# Termux #
+##########
 # Clear default motd
 rm /data/data/com.termux/files/usr/etc/motd
 
-# Set default shell
-chsh -s zsh
-
-# Set default tmux terminal to 256 colour
-echo "set -g default-terminal \"screen-256color\"" > ~/.tmux.conf
-
-curl -fLo ~/.p10k.zsh https://gist.githubusercontent.com/ikornaselur/9c2859c08bc72f0918d20ca6afccce47/raw
-
-#################
-# Termux config #
-#################
+# Termux properties
 cat <<EOF >> ~/.termux/termux.properties
 extra-keys = [ \
  ['ESC','|','/','-','UP', 'BKSP'], \
