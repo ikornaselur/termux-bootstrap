@@ -67,7 +67,7 @@ chsh -s zsh
 # Set default tmux terminal to 256 colour
 echo "set -g default-terminal \"screen-256color\"" > ~/.tmux.conf
 
-curl -fLo ~/.p10k.zsh https://gist.githubusercontent.com/ikornaselur/9c2859c08bc72f0918d20ca6afccce47/raw/ff6bab27ce3b2c12fd094b19b87ffab2b72e2027/.p10k.zsh
+curl -fLo ~/.p10k.zsh https://gist.githubusercontent.com/ikornaselur/9c2859c08bc72f0918d20ca6afccce47/raw
 
 #################
 # Termux config #
