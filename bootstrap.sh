@@ -64,8 +64,6 @@ npm install -g yarn
 ########
 # Tmux #
 ########
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-
 cat <<EOF >> ~/.tmux.conf
 # remap prefix from 'C-b' to 'C-a'
 unbind C-b
@@ -96,8 +94,8 @@ rm /data/data/com.termux/files/usr/etc/motd
 # Termux properties
 cat <<EOF >> ~/.termux/termux.properties
 extra-keys = [ \
- ['ESC','|','/','-','UP', 'BKSP'], \
- ['TAB','CTRL','ALT','LEFT','DOWN','RIGHT'] \
+ ['ESC','|','/','-','UP', 'BKSP', '"'], \
+ ['TAB','CTRL','ALT','LEFT','DOWN','RIGHT', '%'] \
 ]
 EOF
 
