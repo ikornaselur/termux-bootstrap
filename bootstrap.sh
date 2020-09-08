@@ -16,13 +16,17 @@ curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/instal
 rm ~/.zshrc
 # Create simple base .zshrc
 cat <<EOF >> ~/.zshrc
-export ZSH="/data/data/com.termux/files/home/.oh-my-zsh"
+if [[ -r "\${XDG_CACHE_HOME:-\$HOME/.cache}/p10k-instant-prompt-\${(%):-%n}.zsh" ]]; then
+  source "\${XDG_CACHE_HOME:-\$HOME/.cache}/p10k-instant-prompt-\${(%):-%n}.zsh"
+fi
+
+export ZSH="\$HOME/.oh-my-zsh"
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 plugins=(git)
 
-source /data/data/com.termux/files/home/.oh-my-zsh/oh-my-zsh.sh
+source \$ZSH/oh-my-zsh.sh
 
 # Aliases
 alias vim=nvim
@@ -30,7 +34,9 @@ alias ls=exa
 alias rg="rg -S"
 alias rgff="rg --files -g"
 alias p=poetry
-alias ,,='git rev-parse --git-dir >/dev/null 2>&1 && cd `git rev-parse --show-toplevel` || echo "Not in git repo"'
+alias ,,='git rev-parse --git-dir >/dev/null 2>&1 && cd \`git rev-parse --show-toplevel\` || echo "Not in git repo"'
+
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 EOF
 
 # Set up powerlevel10k
@@ -74,7 +80,7 @@ extra-keys = [ \
 EOF
 
 # Font
-curl -fLo ~/.termux/font.tff https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
+curl -fLo ~/.termux/font.ttf https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
 
 #######
 # Vim #
