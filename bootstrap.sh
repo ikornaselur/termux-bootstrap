@@ -61,6 +61,8 @@ chsh -s zsh
 # Set default tmux terminal to 256 colour
 echo "set -g default-terminal \"screen-256color\"" > ~/.tmux.conf
 
+curl -fLo ~/.p10k.zsh https://gist.githubusercontent.com/ikornaselur/9c2859c08bc72f0918d20ca6afccce47/raw/ff6bab27ce3b2c12fd094b19b87ffab2b72e2027/.p10k.zsh
+
 #################
 # Termux config #
 #################
@@ -70,6 +72,9 @@ extra-keys = [ \
  ['TAB','CTRL','ALT','LEFT','DOWN','RIGHT'] \
 ]
 EOF
+
+# Font
+curl -fLo ~/.termux/font.tff https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
 
 #######
 # Vim #
@@ -87,6 +92,6 @@ ln -s ~/projects/dotfiles/nvim/init.vim ~/.config/nvim/init.vim
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # Install neovim plugins
-nvim +PlugInstall +qall
+nvim +'PlugInstall --sync' +qall
 
-echo "All done! Restart Termill..."
+echo "All done! Restart Termux..."
