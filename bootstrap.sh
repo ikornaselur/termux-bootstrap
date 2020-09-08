@@ -64,6 +64,7 @@ npm install -g yarn
 ########
 # Tmux #
 ########
+
 cat <<EOF >> ~/.tmux.conf
 # remap prefix from 'C-b' to 'C-a'
 unbind C-b
@@ -78,12 +79,12 @@ set -g @plugin 'tmux-plugins/tpm'
 set -g @plugin 'tmux-plugins/tmux-sensible'
 set -g @plugin "arcticicestudio/nord-tmux"
 
-if "test ! -d ~/.tmux/plugins/tpm" \
-   "run 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && ~/.tmux/plugins/tpm/bin/install_plugins'"
-
 # Initialize TMUX plugin manager
 run '~/.tmux/plugins/tpm/tpm'
 EOF
+
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+~/.tmux/plugins/tpm/bin/install_plugins
 
 ##########
 # Termux #
