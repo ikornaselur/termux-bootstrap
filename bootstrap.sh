@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# Update
-pkg up -y
+apt-get update
+apt-get --assume-yes upgrade
 
-# Install packages
+pkg up -y
 pkg install -y neovim tmux nodejs python zsh git exa file mosh ripgrep hub perl
 
 #########
@@ -143,3 +143,4 @@ curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.g
 nvim +'PlugInstall --sync' +qall
 
 echo "All done! Restart Termux..."
+echo "Don't forget to termux-setup-storage !"
