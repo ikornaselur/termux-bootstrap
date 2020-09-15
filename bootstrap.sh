@@ -71,6 +71,16 @@ unbind C-b
 set-option -g prefix C-a
 bind-key C-a send-prefix
 
+# vim like movement between panes
+bind C-h select-pane -L
+bind h select-pane -L
+bind C-j select-pane -D
+bind j select-pane -D
+bind C-k select-pane -U
+bind k select-pane -U
+bind C-l select-pane -R
+bind l select-pane -R
+
 # Set default tmux terminal to 256 color
 set -g default-terminal "screen-256color"
 
