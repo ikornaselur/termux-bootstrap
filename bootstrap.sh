@@ -4,7 +4,7 @@
 pkg up -y
 
 # Install packages
-pkg install -y neovim tmux nodejs python zsh git exa file mosh ripgrep hub
+pkg install -y neovim tmux nodejs python zsh git exa file mosh ripgrep hub perl
 
 #########
 # Shell #
@@ -28,6 +28,8 @@ plugins=(git)
 
 source \$ZSH/oh-my-zsh.sh
 
+export EDITOR=nvim
+
 # Aliases
 alias vim=nvim
 alias ls=exa
@@ -38,6 +40,8 @@ alias ,,='git rev-parse --git-dir >/dev/null 2>&1 && cd \`git rev-parse --show-t
 alias git=hub
 
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 EOF
 
 # Set up powerlevel10k
@@ -112,6 +116,13 @@ EOF
 
 # Font
 curl -fLo ~/.termux/font.ttf https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
+
+#######
+# FZF #
+#######
+
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install --key-bindings --completion --no-update-rc
 
 #######
 # Vim #
